@@ -112,15 +112,15 @@
             <div class="container mx-auto px-4 text-center">
                 <h2 class="text-3xl md:text-5xl font-bold text-[#4A7C59] mb-4">Ngã Ba Đường Sự Nghiệp</h2>
                 <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-8">
-                    Bạn đang đứng trước một quyết định quan trọng, một bước ngoặt định hình con đường sự nghiệp Product Designer trong 3 năm tới. Ứng dụng này sẽ phân tích và so sánh ba lựa chọn: tiếp tục ở lại Unifiedpost, chấp nhận offer tại NAB, hoặc tìm kiếm một cơ hội hoàn toàn mới.
+                    Bạn đang đứng trước một quyết định quan trọng, một bước ngoặt định hình con đường sự nghiệp Product Designer trong 3 năm tới. Ứng dụng này sẽ phân tích và so sánh ba lựa chọn: tiếp tục ở lại chốn này, chấp nhận gia nhập cơ hội mới, hoặc tìm kiếm một cơ hội hoàn toàn mới.
                 </p>
                 <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                     <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200/50">
-                        <h3 class="text-xl font-semibold mb-2 text-[#4A7C59]">Ở lại Unifiedpost</h3>
+                        <h3 class="text-xl font-semibold mb-2 text-[#4A7C59]">Ở lại chốn này</h3>
                         <p class="text-gray-500">Sự ổn định quen thuộc, phát triển bền vững nhưng tiềm ẩn sự hao mòn và những thách thức trong môi trường làm việc phân tán.</p>
                     </div>
                     <div class="bg-white p-6 rounded-xl shadow-md border-2 border-[#D88A68]">
-                        <h3 class="text-xl font-semibold mb-2 text-[#D88A68]">Gia nhập NAB</h3>
+                        <h3 class="text-xl font-semibold mb-2 text-[#D88A68]">Gia nhập cơ hội mới</h3>
                         <p class="text-gray-500">Một khởi đầu mới đầy hứa hẹn, mang lại thành công tài chính và cơ hội học hỏi trong một tổ chức lớn, dù có những phức tạp ban đầu.</p>
                     </div>
                     <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200/50">
@@ -156,7 +156,7 @@
                     </p>
                     <div id="path-selector" class="flex justify-center space-x-2 md:space-x-4 bg-gray-200/50 p-2 rounded-full max-w-md mx-auto">
                         <button data-path="stay" class="tab-button w-full py-2 px-4 rounded-full font-semibold text-gray-700">Ở Lại</button>
-                        <button data-path="join" class="tab-button active w-full py-2 px-4 rounded-full font-semibold text-gray-700">Gia Nhập NAB</button>
+                        <button data-path="join" class="tab-button active w-full py-2 px-4 rounded-full font-semibold text-gray-700">Gia Nhập</button>
                         <button data-path="find" class="tab-button w-full py-2 px-4 rounded-full font-semibold text-gray-700">Tìm Mới</button>
                     </div>
                 </div>
@@ -250,9 +250,9 @@
 
             const pathData = {
                 stay: {
-                    title: "Ở lại Unifiedpost",
+                    title: "Ở lại chốn này",
                     color: "text-[#4A7C59]",
-                    summary: "Lựa chọn ở lại mang đến sự ổn định và quen thuộc. Bạn có thể tiếp tục phát triển chuyên môn một cách bền vững. Tuy nhiên, trải bài cảnh báo về sự hao mòn tinh thần, các xung đột lặp lại và những gánh nặng khó tránh khỏi do môi trường làm việc nhỏ, phân tán và báo cáo từ xa. Cơ hội mở rộng mạng lưới và thăng tiến có thể bị hạn chế.",
+                    summary: "Lựa chọn ở lại môi trường hiện tại mang đến sự ổn định và quen thuộc. Bạn có thể tiếp tục phát triển chuyên môn một cách bền vững. Tuy nhiên, trải bài cảnh báo về sự hao mòn tinh thần, các xung đột lặp lại và những gánh nặng khó tránh khỏi do môi trường làm việc nhỏ, phân tán và báo cáo từ xa. Cơ hội mở rộng mạng lưới và thăng tiến có thể bị hạn chế.",
                     financial: {
                         income_2025: 100, // Relative index
                         income_2026: 110, // Relative index
@@ -273,7 +273,7 @@
                     ]
                 },
                 join: {
-                    title: "Gia nhập NAB",
+                    title: "Gia nhập cơ hội mới",
                     color: "text-[#D88A68]",
                     summary: "Đây là một bước chuyển mình mạnh mẽ, một khởi đầu mới đầy tiềm năng. Trải bài hứa hẹn sự thành công rực rỡ về tài chính và sự nghiệp, cùng nhiều cơ hội học hỏi trong một tổ chức lớn. Mặc dù vậy, cần cẩn trọng với những phức tạp và sự không rõ ràng ban đầu trong môi trường mới.",
                     financial: {
@@ -324,12 +324,12 @@
             
             const recommendationData = {
                 main: {
-                    title: "Khuyến nghị chính: Chấp nhận offer tại NAB",
-                    content: "Dựa trên phân tích toàn diện, lời khuyên và dự đoán mạnh mẽ nghiêng về việc chấp nhận offer tại NAB. Đây được xem là bước đi chiến lược và tích cực nhất cho sự nghiệp và tài chính của bạn trong 3 năm tới, đặc biệt khi cân nhắc yếu tố tuổi tác và định hướng phát triển chuyên gia (IC). Lộ trình này hứa hẹn sự phát triển vượt bậc về chuyên môn, cải thiện đáng kể về tài chính và đặt nền móng vững chắc cho tương lai."
+                    title: "Khuyến nghị chính: Chấp nhận cơ hội mới",
+                    content: "Dựa trên phân tích toàn diện, lời khuyên và dự đoán mạnh mẽ nghiêng về việc chấp nhận cơ hội này. Đây được xem là bước đi chiến lược và tích cực nhất cho sự nghiệp và tài chính của bạn trong 3 năm tới, đặc biệt khi cân nhắc yếu tố tuổi tác và định hướng phát triển chuyên gia (IC). Lộ trình này hứa hẹn sự phát triển vượt bậc về chuyên môn, cải thiện đáng kể về tài chính và đặt nền móng vững chắc cho tương lai."
                 },
                 actions: [
                     {
-                        title: "Nếu chấp nhận offer NAB",
+                        title: "Nếu chấp nhận cơ hội mới",
                         items: [
                             "Làm rõ các yếu tố chưa chắc chắn về văn hóa, quản lý trước khi ký hợp đồng.",
                             "Tự tin thương lượng offer dựa trên dữ liệu thị trường và kinh nghiệm bản thân.",
@@ -338,7 +338,7 @@
                         ]
                     },
                     {
-                        title: "Nếu quyết định ở lại Unifiedpost",
+                        title: "Nếu quyết định ở lại chốn này",
                         items: [
                             "Chủ động giải quyết các nguyên nhân gây hao mòn, xung đột.",
                             "Tích cực tìm kiếm cơ hội phát triển nội bộ để tránh trì trệ.",
@@ -346,7 +346,7 @@
                         ]
                     },
                     {
-                        title: "Nếu từ chối NAB và tìm cơ hội khác",
+                        title: "Nếu từ chối và tìm kiếm công ty khác",
                         items: [
                             "Xác định rõ các tiêu chí \"tốt hơn\" của bạn (ngoài lương).",
                             "Nghiên cứu thị trường kỹ lưỡng, đặc biệt là các vị trí remote cho công ty quốc tế.",
@@ -438,7 +438,7 @@
                              <p class="text-center text-sm text-gray-500 mt-4">${data.notes}</p>
                         </div>` : 
                         `<div class="mt-8 text-center p-4 bg-gray-100 rounded-lg">
-                             <h4 class="text-xl font-semibold mb-2 text-gray-800">Phân Tích Tài Chính</h4>
+                             <h4 class="text-xl font-semibold mb-2 text-gray-800">Phân Tích Tài chính</h4>
                              <p class="text-gray-600">${data.financial.notes}</p>
                         </div>`
                         }
