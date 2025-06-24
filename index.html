@@ -10,21 +10,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- 
-        Chosen Palette: Warm Harmony
-        Application Structure Plan: A single-page application with a top navigation bar for smooth scrolling to thematic sections. The structure is designed for a narrative flow: 1. Introduction to the core decision. 2. Interactive Lenormand Tableau for symbolic exploration. 3. A detailed, tab-like comparison of the three career paths (Stay, Join NAB, Find New), covering financials, career growth, and risks. 4. Synthesized strategic recommendations with actionable steps. This structure transforms a dense report into a user-guided journey, allowing for both holistic understanding and detailed comparison, which is more effective for a complex personal decision than a linear document.
+        Chosen Palette: Red & Black Modern
+        Application Structure Plan: A single-page application with a top navigation bar for smooth scrolling to thematic sections. The structure is designed for a narrative flow: 1. Introduction to the core decision. 2. Interactive Lenormand Tableau for symbolic exploration. 3. A detailed, tab-like comparison of the three career paths (Stay, Join NAB, Find New), covering financials, career growth, and risks. 4. Synthesized strategic recommendations presented in a comparative table. This structure transforms a dense report into a user-guided journey, allowing for both holistic understanding and detailed comparison, which is more effective for a complex personal decision than a linear document.
         Visualization & Content Choices: 
         - Lenormand Tableau: Goal: Inform/Explore. Method: Interactive CSS Grid. Interaction: Click card to see interpretation in a modal. Justification: Makes the mystical/symbolic part engaging and less overwhelming.
         - Financial Comparison: Goal: Compare. Method: Chart.js Bar Chart using relative units. Interaction: Hover for detailed tooltips showing relative index. Justification: Provides a quick, powerful visual comparison of financial outcomes without revealing specific numbers, aligning with narrative of long-term potential.
         - Path Analysis: Goal: Compare/Inform. Method: Tabbed content sections. Interaction: Buttons to switch views. Justification: Allows for direct, clutter-free comparison of the three distinct scenarios across multiple dimensions (career, finance, environment).
-        - Recommendations: Goal: Inform/Guide. Method: Accordion sections. Interaction: Click to expand. Justification: Presents actionable advice in a concise, digestible format without cluttering the main view.
+        - Recommendations: Goal: Inform/Guide. Method: Comparative table. Interaction: Read rows/columns. Justification: Offers a clear, side-by-side comparison of action items for different scenarios, making the advice easily digestible and actionable.
         - Library/Method: Chart.js (Canvas) for charts, Vanilla JS for all interactions, and CSS/Unicode for visual elements.
         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
     -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #FDFBF8;
-            color: #383838;
+            background-color: #FAFAFA; /* Neutral 50 - light background */
+            color: #171717; /* Neutral 900 - dark text */
         }
         .nav-link {
             position: relative;
@@ -38,7 +38,7 @@
             bottom: -4px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #D88A68;
+            background-color: #EF4444; /* Red 500 */
             transition: width 0.3s;
         }
         .nav-link:hover::after, .nav-link.active::after {
@@ -55,7 +55,7 @@
             transition: all 0.3s ease;
         }
         .tab-button.active {
-            background-color: #4A7C59;
+            background-color: #DC2626; /* Red 600 */
             color: #FFFFFF;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
@@ -73,7 +73,7 @@
                 height: 450px;
             }
         }
-        .accordion-content {
+        .accordion-content { /* Kept for compatibility, no longer used for recommendation */
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease-in-out;
@@ -86,15 +86,15 @@
     <header id="header" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <div class="container mx-auto px-4">
             <nav class="flex justify-between items-center py-4">
-                <h1 class="text-xl md:text-2xl font-bold text-[#4A7C59]">Lộ Trình Sự Nghiệp</h1>
+                <h1 class="text-xl md:text-2xl font-bold text-red-700">Lộ Trình Sự Nghiệp</h1>
                 <div class="hidden md:flex space-x-6">
-                    <a href="#overview" class="nav-link font-medium text-gray-600 hover:text-[#D88A68]">Tổng Quan</a>
-                    <a href="#lenormand" class="nav-link font-medium text-gray-600 hover:text-[#D88A68]">Lời Sấm Truyền</a>
-                    <a href="#analysis" class="nav-link font-medium text-gray-600 hover:text-[#D88A68]">Phân Tích Sâu</a>
-                    <a href="#recommendation" class="nav-link font-medium text-gray-600 hover:text-[#D88A68]">Lời Khuyên</a>
+                    <a href="#overview" class="nav-link font-medium text-gray-600 hover:text-red-500">Tổng Quan</a>
+                    <a href="#lenormand" class="nav-link font-medium text-gray-600 hover:text-red-500">Lời Sấm Truyền</a>
+                    <a href="#analysis" class="nav-link font-medium text-gray-600 hover:text-red-500">Phân Tích Sâu</a>
+                    <a href="#recommendation" class="nav-link font-medium text-gray-600 hover:text-red-500">Lời Khuyên</a>
                 </div>
                 <div class="md:hidden">
-                    <select id="mobile-nav" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#4A7C59] focus:border-[#4A7C59] block w-full p-2.5">
+                    <select id="mobile-nav" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-700 focus:border-red-700 block w-full p-2.5">
                         <option value="#overview">Tổng Quan</option>
                         <option value="#lenormand">Lời Sấm Truyền</option>
                         <option value="#analysis">Phân Tích Sâu</option>
@@ -109,22 +109,22 @@
     <main>
         <!-- Section 1: Overview -->
         <section id="overview" class="py-16 md:py-24">
-            <div class="container mx-auto px-4 text-center">
-                <h2 class="text-3xl md:text-5xl font-bold text-[#4A7C59] mb-4">Ngã Ba Đường Sự Nghiệp</h2>
-                <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-8">
+            <div class="max-w-7xl mx-auto px-8 lg:px-32 text-center">
+                <h2 class="text-3xl md:text-5xl font-bold text-red-700 mb-4">Ngã Ba Đường Sự Nghiệp</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-700 mb-8">
                     Bạn đang đứng trước một quyết định quan trọng, một bước ngoặt định hình con đường sự nghiệp Product Designer trong 3 năm tới. Ứng dụng này sẽ phân tích và so sánh ba lựa chọn: tiếp tục ở lại chốn này, chấp nhận gia nhập cơ hội mới, hoặc tìm kiếm một cơ hội hoàn toàn mới.
                 </p>
                 <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                     <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200/50">
-                        <h3 class="text-xl font-semibold mb-2 text-[#4A7C59]">Ở lại chốn này</h3>
+                        <h3 class="text-xl font-semibold mb-2 text-red-700">Ở lại chốn này</h3>
                         <p class="text-gray-500">Sự ổn định quen thuộc, phát triển bền vững nhưng tiềm ẩn sự hao mòn và những thách thức trong môi trường làm việc phân tán.</p>
                     </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md border-2 border-[#D88A68]">
-                        <h3 class="text-xl font-semibold mb-2 text-[#D88A68]">Gia nhập cơ hội mới</h3>
+                    <div class="bg-white p-6 rounded-xl shadow-md border-2 border-red-500">
+                        <h3 class="text-xl font-semibold mb-2 text-red-500">Gia nhập cơ hội mới</h3>
                         <p class="text-gray-500">Một khởi đầu mới đầy hứa hẹn, mang lại thành công tài chính và cơ hội học hỏi trong một tổ chức lớn, dù có những phức tạp ban đầu.</p>
                     </div>
                     <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200/50">
-                        <h3 class="text-xl font-semibold mb-2 text-[#4A7C59]">Tìm Cơ Hội Mới</h3>
+                        <h3 class="text-xl font-semibold mb-2 text-red-700">Tìm Cơ Hội Mới</h3>
                         <p class="text-gray-500">Kích hoạt năng lượng thay đổi, có khả năng tìm được "cơ hội tốt hơn", nhưng đòi hỏi sự kiên nhẫn và chiến lược để vượt qua rào cản.</p>
                     </div>
                 </div>
@@ -132,11 +132,11 @@
         </section>
 
         <!-- Section 2: Lenormand -->
-        <section id="lenormand" class="py-16 md:py-24 bg-green-50/50">
-            <div class="container mx-auto px-4">
+        <section id="lenormand" class="py-16 md:py-24 bg-red-50/50">
+            <div class="max-w-7xl mx-auto px-8 lg:px-32">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-5xl font-bold text-[#4A7C59] mb-4">Lời Sấm Truyền Từ Lenormand</h2>
-                    <p class="max-w-3xl mx-auto text-lg text-gray-600">
+                    <h2 class="text-3xl md:text-5xl font-bold text-red-700 mb-4">Lời Sấm Truyền Từ Lenormand</h2>
+                    <p class="max-w-3xl mx-auto text-lg text-gray-700">
                         Trải bài Grand Tableau 4x9 vẽ nên một bức tranh toàn cảnh về quá khứ, hiện tại và tương lai. Hãy khám phá ý nghĩa của từng lá bài để hiểu rõ hơn về các năng lượng đang ảnh hưởng đến quyết định của bạn.
                     </p>
                     <p class="text-sm text-gray-500 mt-2">(Nhấp vào mỗi lá bài để xem diễn giải chi tiết)</p>
@@ -148,10 +148,10 @@
 
         <!-- Section 3: Analysis -->
         <section id="analysis" class="py-16 md:py-24">
-            <div class="container mx-auto px-4">
+            <div class="max-w-7xl mx-auto px-8 lg:px-32">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-5xl font-bold text-[#4A7C59] mb-4">Phân Tích Chuyên Sâu 3 Lộ Trình</h2>
-                    <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-8">
+                    <h2 class="text-3xl md:text-5xl font-bold text-red-700 mb-4">Phân Tích Chuyên Sâu 3 Lộ Trình</h2>
+                    <p class="max-w-3xl mx-auto text-lg text-gray-700 mb-8">
                         So sánh chi tiết các lựa chọn dựa trên những yếu tố then chốt nhất: Tài chính, Phát triển chuyên môn, Môi trường làm việc và Rủi ro.
                     </p>
                     <div id="path-selector" class="flex justify-center space-x-2 md:space-x-4 bg-gray-200/50 p-2 rounded-full max-w-md mx-auto">
@@ -167,15 +167,15 @@
         </section>
 
         <!-- Section 4: Recommendation -->
-        <section id="recommendation" class="py-16 md:py-24 bg-green-50/50">
-            <div class="container mx-auto px-4">
+        <section id="recommendation" class="py-16 md:py-24 bg-red-50/50">
+            <div class="max-w-7xl mx-auto px-8 lg:px-32">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-5xl font-bold text-[#4A7C59] mb-4">Lời Khuyên & Các Bước Hành Động</h2>
-                    <p class="max-w-3xl mx-auto text-lg text-gray-600">
+                    <h2 class="text-3xl md:text-5xl font-bold text-red-700 mb-4">Lời Khuyên & Các Bước Hành Động</h2>
+                    <p class="max-w-3xl mx-auto text-lg text-gray-700">
                         Tổng hợp phân tích từ Lenormand và dữ liệu thị trường để đưa ra khuyến nghị chiến lược, cùng các bước hành động cụ thể cho từng kịch bản.
                     </p>
                 </div>
-                <div id="recommendation-content" class="max-w-4xl mx-auto space-y-4">
+                <div id="recommendation-content" class="space-y-4">
                 </div>
             </div>
         </section>
@@ -187,7 +187,7 @@
             <div class="p-6">
                 <div class="flex justify-between items-start">
                     <div>
-                        <h3 id="modal-card-name" class="text-2xl font-bold text-[#4A7C59]"></h3>
+                        <h3 id="modal-card-name" class="text-2xl font-bold text-red-700"></h3>
                         <p id="modal-card-house" class="text-sm text-gray-500"></p>
                     </div>
                     <button id="close-modal" class="text-gray-400 hover:text-gray-600">&times;</button>
@@ -204,7 +204,7 @@
             
             const cardData = {
                 1: { name: 'Rider', emoji: '🐎', house: 'Ring', desc: 'Tin tức, chuyển động, sự đến. Nằm trong Nhà của Ring (cam kết), nó báo hiệu tin tức về một cam kết hoặc hợp đồng mới đang đến nhanh chóng.' },
-                2: { name: 'Clover', emoji: '🍀', house: 'Tower', desc: 'May mắn nhỏ, cơ hội. Nằm trong Nhà của Tower (tổ chức lớn), nó cho thấy một cơ hội may mắn nhỏ sẽ đến trong một môi trường công ty lớn.' },
+                2: { name: 'Clover', emoji: '�', house: 'Tower', desc: 'May mắn nhỏ, cơ hội. Nằm trong Nhà của Tower (tổ chức lớn), nó cho thấy một cơ hội may mắn nhỏ sẽ đến trong một môi trường công ty lớn.' },
                 3: { name: 'Ship', emoji: '🚢', house: 'Man', desc: 'Di chuyển, thay đổi, du lịch. Nằm trong Nhà của Man (người hỏi nam), nó cho thấy người hỏi đang suy nghĩ hoặc trải qua một sự thay đổi, di chuyển lớn.' },
                 4: { name: 'House', emoji: '🏠', house: 'House', desc: 'Ngôi nhà, sự ổn định, an toàn. Nằm trong chính Nhà của nó, năng lượng ổn định được khuếch đại, cho thấy sự an toàn và vững chắc.' },
                 5: { name: 'Tree', emoji: '🌳', house: 'Tree', desc: 'Sức khỏe, sự phát triển lâu dài. Nằm trong chính Nhà của nó, nó nhấn mạnh sự phát triển bền vững, ổn định và sức khỏe nghề nghiệp.' },
@@ -230,7 +230,7 @@
                 25: { name: 'Ring', emoji: '💍', house: 'Ring', desc: 'Cam kết, hợp đồng. Nằm trong chính Nhà của nó, nó nhấn mạnh tầm quan trọng của một cam kết hoặc hợp đồng mới.' },
                 26: { name: 'Book', emoji: '📖', house: 'Book', desc: 'Kiến thức, học hỏi, bí mật. Nằm trong chính Nhà của nó, nó cho thấy cơ hội học hỏi, khám phá kiến thức mới là một phần quan trọng của con đường phía trước.' },
                 27: { name: 'Letter', emoji: '✉️', house: 'Sun', desc: 'Tin tức, tài liệu, hợp đồng. Nằm trong Nhà của Sun (thành công), nó cho thấy tin tức hoặc hợp đồng sẽ mang lại thành công lớn.' },
-                28: { name: 'Man', emoji: '👨', house: 'Ship', desc: 'Người đàn ông, khía cạnh nam tính. Nằm trong Nhà của Ship (di chuyển), nó có thể chỉ một người đàn ông liên quan đến sự di chuyển, hoặc sự chủ động cần thiết cho sự thay đổi.' },
+                28: { name: 'Man', emoji: '👨', house: 'Ship', desc: 'Người đàn ông, khía hạn nam tính. Nằm trong Nhà của Ship (di chuyển), nó có thể chỉ một người đàn ông liên quan đến sự di chuyển, hoặc sự chủ động cần thiết cho sự thay đổi.' },
                 29: { name: 'Woman', emoji: '👩', house: 'Woman', desc: 'Người phụ nữ, người hỏi. Nằm trong chính Nhà của mình, lá bài này cho thấy bạn đang ở một vị trí mạnh mẽ, tự chủ và tập trung vào bản thân để đưa ra quyết định.' },
                 30: { name: 'Lily', emoji: '🌸', house: 'Lily', desc: 'Trưởng thành, kinh nghiệm, sự thanh bình. Nằm trong chính Nhà của nó, nó nhấn mạnh sự trưởng thành và kinh nghiệm mà bạn mang lại cho tình huống này.' },
                 31: { name: 'Sun', emoji: '☀️', house: 'Sun', desc: 'Thành công, hạnh phúc, chiến thắng. Nằm trong chính Nhà của nó, năng lượng tích cực này được khuếch đại, hứa hẹn một kết quả rực rỡ và thành công.' },
@@ -251,12 +251,12 @@
             const pathData = {
                 stay: {
                     title: "Ở lại chốn này",
-                    color: "text-[#4A7C59]",
-                    summary: "Lựa chọn ở lại môi trường hiện tại mang đến sự ổn định và quen thuộc. Bạn có thể tiếp tục phát triển chuyên môn một cách bền vững. Tuy nhiên, trải bài cảnh báo về sự hao mòn tinh thần, các xung đột lặp lại và những gánh nặng khó tránh khỏi do môi trường làm việc nhỏ, phân tán và báo cáo từ xa. Cơ hội mở rộng mạng lưới và thăng tiến có thể bị hạn chế.",
+                    color: "text-red-700",
+                    summary: "Lựa chọn ở lại môi trường hiện tại mang đến sự ổn định và quen thuộc. Bạn có thể tiếp tục phát triển chuyên môn một cách bền vững. Tuy nhiên, trải bài cảnh báo về sự hao mòn tinh thần, các xung đột lặp lại và những thách thức trong môi trường làm việc phân tán. Cơ hội mở rộng mạng lưới và thăng tiến có thể bị hạn chế.",
                     financial: {
-                        income_2025: 100, // Relative index
-                        income_2026: 110, // Relative index
-                        income_2027: 121, // Relative index
+                        income_2025: 100, /* Relative index */
+                        income_2026: 110, /* Relative index */
+                        income_2027: 121, /* Relative index */
                         notes: "Tổng thu nhập bao gồm lương tháng 13 và khả năng tăng lương hàng năm tùy tình hình kinh doanh."
                     },
                     pros: [
@@ -274,12 +274,12 @@
                 },
                 join: {
                     title: "Gia nhập cơ hội mới",
-                    color: "text-[#D88A68]",
+                    color: "text-red-500",
                     summary: "Đây là một bước chuyển mình mạnh mẽ, một khởi đầu mới đầy tiềm năng. Trải bài hứa hẹn sự thành công rực rỡ về tài chính và sự nghiệp, cùng nhiều cơ hội học hỏi trong một tổ chức lớn. Mặc dù vậy, cần cẩn trọng với những phức tạp và sự không rõ ràng ban đầu trong môi trường mới.",
                     financial: {
-                        income_2025: 90, // Relative index (slightly lower initially)
-                        income_2026: 115, // Relative index (higher than UP in 2026)
-                        income_2027: 135, // Relative index (showing long-term potential)
+                        income_2025: 90, /* Relative index (slightly lower initially) */
+                        income_2026: 115, /* Relative index (higher than UP in 2026) */
+                        income_2027: 135, /* Relative index (showing long-term potential) */
                         notes: "Tổng thu nhập bao gồm lương tháng 13 và khả năng bonus tháng 14. Mức lương cố định cho đến kỳ review tiếp theo."
                     },
                     pros: [
@@ -298,10 +298,10 @@
                 },
                 find: {
                     title: "Tìm kiếm cơ hội mới",
-                    color: "text-[#4A7C59]",
+                    color: "text-red-700",
                     summary: "Trải bài cho thấy năng lượng thay đổi rất mạnh mẽ. Việc chủ động tìm kiếm có khả năng mang lại những đề nghị hấp dẫn và một khởi đầu mới thành công. Tuy nhiên, con đường này không bằng phẳng, đòi hỏi sự kiên nhẫn, chiến lược để vượt qua các chướng ngại vật, sự trì hoãn và các yếu tố phức tạp tiềm ẩn.",
                      financial: {
-                        income_2025: null, // No specific relative index as it varies widely
+                        income_2025: null, /* No specific relative index as it varies widely */
                         income_2026: null,
                         income_2027: null,
                         notes: "Tài chính phụ thuộc rất nhiều vào công ty, vai trò và khả năng đàm phán. Thị trường Việt Nam có mức lương thấp hơn đáng kể so với Úc."
@@ -324,38 +324,82 @@
             
             const recommendationData = {
                 main: {
-                    title: "Khuyến nghị chính: Chấp nhận cơ hội mới",
-                    content: "Dựa trên phân tích toàn diện, lời khuyên và dự đoán mạnh mẽ nghiêng về việc chấp nhận cơ hội này. Đây được xem là bước đi chiến lược và tích cực nhất cho sự nghiệp và tài chính của bạn trong 3 năm tới, đặc biệt khi cân nhắc yếu tố tuổi tác và định hướng phát triển chuyên gia (IC). Lộ trình này hứa hẹn sự phát triển vượt bậc về chuyên môn, cải thiện đáng kể về tài chính và đặt nền móng vững chắc cho tương lai."
-                },
-                actions: [
-                    {
-                        title: "Nếu chấp nhận cơ hội mới",
-                        items: [
-                            "Làm rõ các yếu tố chưa chắc chắn về văn hóa, quản lý trước khi ký hợp đồng.",
-                            "Tự tin thương lượng offer dựa trên dữ liệu thị trường và kinh nghiệm bản thân.",
-                            "Chủ động tận dụng cơ hội học hỏi, xây dựng mạng lưới trong môi trường mới.",
-                            "Thể hiện sự khôn ngoan, chiến lược để thích nghi và tạo ảnh hưởng."
-                        ]
-                    },
-                    {
-                        title: "Nếu quyết định ở lại chốn này",
-                        items: [
-                            "Chủ động giải quyết các nguyên nhân gây hao mòn, xung đột.",
-                            "Tích cực tìm kiếm cơ hội phát triển nội bộ để tránh trì trệ.",
-                            "Đặt ra mốc thời gian (ví dụ: 1 năm) để đánh giá lại và sẵn sàng thay đổi nếu cần."
-                        ]
-                    },
-                    {
-                        title: "Nếu từ chối và tìm kiếm công ty khác",
-                        items: [
-                            "Xác định rõ các tiêu chí \"tốt hơn\" của bạn (ngoài lương).",
-                            "Nghiên cứu thị trường kỹ lưỡng, đặc biệt là các vị trí remote cho công ty quốc tế.",
-                            "Phát triển các kỹ năng mới nổi (AI, AR/VR) để tăng sức cạnh tranh.",
-                            "Quản lý kỳ vọng và chuẩn bị tâm lý cho một quá trình tìm kiếm đầy thách thức."
-                        ]
-                    }
-                ]
+                    title: "Khuyến nghị chiến lược",
+                    content: "Dựa trên phân tích toàn diện, lời khuyên và dự đoán mạnh mẽ nghiêng về việc chấp nhận gia nhập cơ hội mới. Đây được xem là bước đi chiến lược và tích cực nhất cho sự nghiệp và tài chính của bạn trong 3 năm tới, đặc biệt khi cân nhắc yếu tố tuổi tác và định hướng phát triển chuyên gia (IC). Lộ trình này hứa hẹn sự phát triển vượt bậc về chuyên môn, cải thiện đáng kể về tài chính và đặt nền tóng vững chắc cho tương lai."
+                }
             };
+
+            const recommendationTableData = [
+                {
+                    actionCategory: "Làm rõ và Đánh giá",
+                    items: [
+                        {
+                            description: "Làm rõ các yếu tố chưa chắc chắn (văn hóa, quản lý, dự án)",
+                            stay: "Chủ động cải thiện giao tiếp với team Bỉ, đa dạng hóa dự án nội bộ.",
+                            join: "Tìm hiểu kỹ văn hóa team, phong cách quản lý, dự án cụ thể.",
+                            find: "Định nghĩa rõ các tiêu chí 'tốt hơn' của bản thân."
+                        },
+                        {
+                            description: "Đánh giá sự phù hợp với lộ trình phát triển chuyên gia (IC)",
+                            stay: "Tìm kiếm cơ hội phát triển kỹ năng/vai trò mới để tránh trì trệ.",
+                            join: "Đảm bảo vai trò phù hợp với hướng đi IC chuyên sâu.",
+                            find: "Xác định rõ các tiêu chí phù hợp với lộ trình IC."
+                        }
+                    ]
+                },
+                {
+                    actionCategory: "Tài chính và Thương lượng",
+                    items: [
+                        {
+                            description: "Thương lượng offer tài chính",
+                            stay: "Xem xét lại sau một thời gian để đánh giá cải thiện tài chính.",
+                            join: "Tự tin thương lượng offer (bonus, cam kết review lương sớm).",
+                            find: "Thực tế về mức tăng lương, cân nhắc giá trị tổng thể."
+                        },
+                        {
+                            description: "Quản lý kỳ vọng tài chính",
+                            stay: "Hãy thực tế về tiềm năng tăng lương nếu ở lại.",
+                            join: "Hiểu rõ lộ trình lương, tiềm năng bonus.",
+                            find: "Quản lý kỳ vọng lương thực tế trong thị trường hiện tại."
+                        }
+                    ]
+                },
+                {
+                    actionCategory: "Phát triển và Mạng lưới",
+                    items: [
+                        {
+                            description: "Tận dụng cơ hội học hỏi và phát triển chuyên sâu",
+                            stay: "Chủ động đề xuất dự án mới, tìm kiếm cơ hội học hỏi.",
+                            join: "Tìm kiếm dự án đa dạng, tham gia khóa học/hội thảo.",
+                            find: "Phát triển kỹ năng mới nổi (AI, AR/VR) và portfolio."
+                        },
+                        {
+                            description: "Xây dựng và duy trì mạng lưới chuyên nghiệp",
+                            stay: "Nỗ lực mở rộng mạng lưới tại địa phương/trong ngành.",
+                            join: "Tích cực kết nối với đồng nghiệp và bên liên quan.",
+                            find: "Tham gia cộng đồng thiết kế, sự kiện ngành, tận dụng LinkedIn."
+                        }
+                    ]
+                },
+                {
+                    actionCategory: "Thích nghi và Vượt qua thách thức",
+                    items: [
+                        {
+                            description: "Đối mặt với thách thức và xung đột",
+                            stay: "Xác định nguyên nhân lo lắng/xung đột, chủ động giải quyết.",
+                            join: "Thể hiện khả năng thích nghi, giải quyết vấn đề chiến lược.",
+                            find: "Sẵn sàng đối mặt với chướng ngại vật và phức tạp."
+                        },
+                        {
+                            description: "Quản lý rủi ro tuổi tác và thị trường",
+                            stay: "Chú ý đến 'lời nguyền tuổi 35', tìm cách chứng minh giá trị.",
+                            join: "Tận dụng tuổi tác và kinh nghiệm làm lợi thế.",
+                            find: "Cân nhắc rào cản tuổi tác khi tìm kiếm tại Việt Nam."
+                        }
+                    ]
+                }
+            ];
+
 
             const grid = document.getElementById('grand-tableau-grid');
             grandTableauLayout.forEach(cardNumber => {
@@ -365,8 +409,8 @@
                 cardElement.dataset.cardNumber = cardNumber;
                 
                 let significatorClass = '';
-                if (cardNumber === 29) { // Woman
-                    significatorClass = 'border-2 border-[#D88A68] bg-orange-50';
+                if (cardNumber === 29) { /* Woman */
+                    significatorClass = 'border-2 border-red-500 bg-red-100'; /* Changed to red-100 */
                 }
                 cardElement.className += ` ${significatorClass}`;
 
@@ -412,17 +456,17 @@
                 pathContent.innerHTML = `
                     <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg transition-opacity duration-500 animate-fade-in">
                         <h3 class="text-2xl md:text-3xl font-bold ${data.color} mb-4">${data.title}</h3>
-                        <p class="text-gray-600 mb-6">${data.summary}</p>
+                        <p class="text-gray-700 mb-6">${data.summary}</p>
                         
                         <div class="grid md:grid-cols-2 gap-8 mb-8">
                             <div>
-                                <h4 class="text-lg font-semibold mb-3 text-green-700">✔️ Ưu điểm</h4>
+                                <h4 class="text-lg font-semibold mb-3 text-red-700">✔️ Ưu điểm</h4>
                                 <ul class="space-y-2 list-inside">
                                     ${data.pros.map(item => `<li class="text-gray-700 flex items-start"><span class="text-green-500 mr-2 mt-1">✓</span><span>${item}</span></li>`).join('')}
                                 </ul>
                             </div>
                             <div>
-                                <h4 class="text-lg font-semibold mb-3 text-red-700">❌ Thách thức</h4>
+                                <h4 class="text-lg font-semibold mb-3 text-gray-700">❌ Thách thức</h4>
                                 <ul class="space-y-2 list-inside">
                                     ${data.cons.map(item => `<li class="text-gray-700 flex items-start"><span class="text-red-500 mr-2 mt-1">✗</span><span>${item}</span></li>`).join('')}
                                 </ul>
@@ -439,7 +483,7 @@
                         </div>` : 
                         `<div class="mt-8 text-center p-4 bg-gray-100 rounded-lg">
                              <h4 class="text-xl font-semibold mb-2 text-gray-800">Phân Tích Tài chính</h4>
-                             <p class="text-gray-600">${data.financial.notes}</p>
+                             <p class="text-gray-700">${data.financial.notes}</p>
                         </div>`
                         }
                     </div>
@@ -459,7 +503,7 @@
                 const labels = ['2025', '2026', '2027'];
                 const datasets = [];
 
-                // Filter out 'find' path if it has null financial data
+                /* Filter out 'find' path if it has null financial data */
                 const pathsToDisplay = Object.keys(pathData).filter(key => pathData[key].financial.income_2025 !== null);
 
                 pathsToDisplay.forEach(key => {
@@ -467,8 +511,8 @@
                     datasets.push({
                         label: value.title,
                         data: [value.financial.income_2025, value.financial.income_2026, value.financial.income_2027],
-                        backgroundColor: key === currentPath ? (key === 'join' ? '#D88A68' : '#4A7C59') : '#E5E7EB',
-                        borderColor: key === currentPath ? (key === 'join' ? '#c57a5d' : '#406b4f') : '#D1D5DB',
+                        backgroundColor: key === currentPath ? (key === 'join' ? '#EF4444' /* Red 500 */ : '#DC2626' /* Red 600 */) : '#E5E7EB',
+                        borderColor: key === currentPath ? (key === 'join' ? '#B91C1C' /* Red 700 */ : '#991B1B' /* Red 800 */) : '#D1D5DB',
                         borderWidth: 1,
                         borderRadius: 5
                     });
@@ -511,7 +555,7 @@
                                 },
                                 ticks: {
                                     callback: function(value, index, ticks) {
-                                        return `CS ${value}`; // "CS" for Chỉ số
+                                        return `CS ${value}`; /* "CS" for Chỉ số */
                                     }
                                 }
                             }
@@ -531,44 +575,54 @@
                 }
             });
 
-            // Initial render for 'join' path, which has a chart
+            /* Initial render for 'join' path, which has a chart */
             renderPathContent('join');
 
             const recommendationContainer = document.getElementById('recommendation-content');
-            recommendationContainer.innerHTML = `
-                <div class="bg-white p-6 rounded-xl shadow-md border-2 border-[#D88A68]">
-                    <h3 class="text-xl font-semibold mb-2 text-[#D88A68]">${recommendationData.main.title}</h3>
-                    <p class="text-gray-600">${recommendationData.main.content}</p>
+            
+            let tableHtml = `
+                <div class="bg-white p-6 rounded-xl shadow-md border-2 border-red-500 mb-6">
+                    <h3 class="text-xl font-semibold mb-2 text-red-500">${recommendationData.main.title}</h3>
+                    <p class="text-gray-700">${recommendationData.main.content}</p>
                 </div>
-                ${recommendationData.actions.map((action, index) => `
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <button class="accordion-toggle w-full text-left p-4 flex justify-between items-center font-semibold text-lg text-[#4A7C59]">
-                        <span>${action.title}</span>
-                        <span class="transform transition-transform duration-300">▼</span>
-                    </button>
-                    <div class="accordion-content px-4 pb-4">
-                        <ul class="space-y-2 list-inside text-gray-700">
-                            ${action.items.map(item => `<li class="flex items-start"><span class="text-[#D88A68] mr-2 mt-1">›</span><span>${item}</span></li>`).join('')}
-                        </ul>
-                    </div>
-                </div>
-                `).join('')}
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-red-100">
+                                <th class="py-3 px-4 border-b-2 border-red-300 text-red-700 font-semibold rounded-tl-lg">Hành Động Quan Trọng</th>
+                                <th class="py-3 px-4 border-b-2 border-red-300 text-red-700 font-semibold">Ở lại chốn này</th>
+                                <th class="py-3 px-4 border-b-2 border-red-300 text-red-500 font-semibold">Gia nhập cơ hội mới</th>
+                                <th class="py-3 px-4 border-b-2 border-red-300 text-red-700 font-semibold rounded-tr-lg">Tìm kiếm công ty khác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
             `;
 
-            document.querySelectorAll('.accordion-toggle').forEach(button => {
-                button.addEventListener('click', () => {
-                    const content = button.nextElementSibling;
-                    const icon = button.querySelector('span:last-child');
-                    
-                    if (content.style.maxHeight) {
-                        content.style.maxHeight = null;
-                        icon.style.transform = 'rotate(0deg)';
-                    } else {
-                        content.style.maxHeight = content.scrollHeight + "px";
-                        icon.style.transform = 'rotate(180deg)';
-                    } 
+            recommendationTableData.forEach(category => {
+                tableHtml += `
+                    <tr class="bg-gray-200"> <!-- Background for category row -->
+                        <td colspan="4" class="py-2 px-4 border-b border-gray-300 font-bold text-gray-800">${category.actionCategory}</td>
+                    </tr>
+                `;
+                category.items.forEach(item => {
+                    tableHtml += `
+                        <tr class="bg-white"> <!-- White background for data rows -->
+                            <td class="py-3 px-4 border-b border-gray-200 text-gray-700">${item.description}</td>
+                            <td class="py-3 px-4 border-b border-gray-200 text-gray-700">${item.stay}</td>
+                            <td class="py-3 px-4 border-b border-gray-200 text-gray-700">${item.join}</td>
+                            <td class="py-3 px-4 border-b border-gray-200 text-gray-700">${item.find}</td>
+                        </tr>
+                    `;
                 });
             });
+
+            tableHtml += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            recommendationContainer.innerHTML = tableHtml;
             
             const mobileNav = document.getElementById('mobile-nav');
             mobileNav.addEventListener('change', (e) => {
@@ -579,3 +633,4 @@
     </script>
 </body>
 </html>
+�
